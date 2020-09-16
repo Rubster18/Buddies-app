@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useState} from 'react';
+import Modal from './Modal';
 import Header from './Header';
 
 const listOfPeople = [
@@ -11,14 +12,24 @@ const listOfPeople = [
   ];
 
 const AdminTable = () => {
+    const [show, setShow] = useState(false);
+    const [person, setPerson] = useState({});
 
+        const showModal = (person) =>{
+          setPerson(person)
+          setShow(true)
+        }
+        const closeModal = () =>{
+            setShow(false)
+        }
     return (
         <div>
             <Header />
+            <Modal show={show} closeModal={closeModal} person={person}/>
             <div className="container-form">
                 <h1>Table of participants</h1>
 
-                <table>
+                <table id="tableId">
                     <thead>
                         <th className="name-column">Name</th>
                         <th className="age-column">Age</th>
@@ -29,7 +40,8 @@ const AdminTable = () => {
                     </thead>
                     <tbody>
                         {listOfPeople.map( person => (
-                            <tr key={person.id} className={person.buddy_patient}>
+                            
+                            <tr key={person.id} className={person.buddy_patient} onClick={()=>showModal(person)}>
                                 <td className="name-column">{person.name}</td>
                                 <td className="age-column">{person.age}</td>
                                 <td className="email-column">{person.email}</td>
