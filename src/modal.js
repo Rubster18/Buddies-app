@@ -9,18 +9,53 @@ const Modal = ({person, show, closeModal}) => {
      return null;
    }
     return(
-      <div className="modal-box">
+      <div className="modal-box" id="modal-box">
          <div className="modalcontainer">
-         <h1>{person.name}</h1>
-            <p className="modalprops">age: {person.age}</p>
-            <p className="modalprops">email: {person.email}</p>
-            <p className="modalprops">hometown: {person.hometown}</p>
-            <p className="modalprops">hobbies and interests: {person.hobbies}</p>
-            <p className="modalprops">buddy or patient? {person.buddy_patient}</p>
-            <div className="btn-container">
-            <button className="small-button delete"> Delete </button>
-            <button className="small-button close" onClick={closeModal}> Close </button>
-        </div>
+            <h1 className="modal-head">{person.name}</h1>
+            <div className="close-btn" onClick={closeModal}> x </div>
+            <div className="modal-props">
+
+              <div className="modalp">
+                <div className="textrows">
+                <p> <b>Leeftijd: </b> </p>
+                <p className="underlined">{person.age}</p>
+               </div>
+              </div>
+              <div className="modalp">
+                <div className="textrows">
+                  <p> <b>Email:</b></p>
+                  <p className="underlined">{person.email}</p>
+                </div>
+              </div>
+
+              <div className="modalp">
+                <div className="textrows">
+                  <p> <b>Geboorteplaats:</b> </p> 
+                  <p className="underlined">{person.hometown}</p>
+                </div>
+              </div>
+
+              <div className="modalp">
+                <div className="textrows">
+                  <p><b>Maatje of patiënt?</b> </p>
+                  <p className="underlined"> {person.buddy_patient}</p> 
+                </div>
+              </div>
+
+              <div className="hobbiebox">
+                <div className="textrows">
+                  <p> <b> hobby's en interesses:</b></p> 
+                  <p>{person.hobbies}</p>
+                </div>
+              </div>
+          </div>
+          
+
+          <div className="btn-container">
+                <button className="small-button delete"> Delete </button>
+                <button className="match-btn" > Move to match list</button>
+            </div>
+
          </div>
         <div className="overlay" onClick={closeModal}></div>
       </div>
