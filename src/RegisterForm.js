@@ -86,6 +86,7 @@ const RegisterForm = (props) => {
       required/>
 
     <input type="number" 
+    className="im_a_buddy"
     name="im_a_buddy" 
     id="im_a_buddy" 
     value={props.value}
