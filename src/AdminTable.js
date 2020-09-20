@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import Modal from './Modal';
 import Header from './Header';
+import HeaderAdmin from './HeaderAdmin';
 
 const AdminTableFetcher = props => {
     const [tableData, setTableData] = React.useState(null);
@@ -33,7 +34,7 @@ const AdminTableFetcher = props => {
             (<p>Loading...</p>) 
         : (
             <div className="">
-                <Header />
+                <HeaderAdmin />
 
                 <div className="container-form">
                     <h1>Table of participants</h1>
