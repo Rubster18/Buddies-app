@@ -78,17 +78,3 @@ const Modal = ({person, show, closeModal}) => {
   };
 
   export default Modal;
-          
-
-          <div className="btn-container">
-                <button className="small-button delete"> Delete </button>
-                <button className="match-btn" > Move to match list</button>
-            </div>
-
-         </div>
-        <div className="overlay" onClick={closeModal}></div>
-      </div>
-    )
-  };
-
-  export default Modal;
