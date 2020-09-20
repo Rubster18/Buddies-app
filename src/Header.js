@@ -9,7 +9,7 @@ const Header = () => {
 
                 <div className="small-buttons-container">
                 <a className="button link" href="/">Home</a>
-                <Button route="#" buttonType="small" text="Login" submitBtn="true" />
+                <Button route="/Login" buttonType="small" text="Login"/>
                 </div>
             </div>
 

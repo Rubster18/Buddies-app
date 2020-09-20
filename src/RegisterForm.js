@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-const RegisterForm = () => {
+const RegisterForm = (props) => {
 
   const history = useHistory();
   const [state, setState] = useState({
@@ -9,13 +9,15 @@ const RegisterForm = () => {
     birthDate: "",
     email: "",
     hobbies: "",
-    hometown: ""
+    hometown: "",
+    im_a_buddy:0,
   });
+  console.log(props);
 
   //getting the values
 
   const onChange = (e) => {
-    let data = {...state};
+    let data = {...state, im_a_buddy:props.value};
     data[e.target.name] = e.target.value;
     setState(data);
   };
@@ -29,11 +31,21 @@ const RegisterForm = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     storeDataInDatabase(state);
+    const sendmethod = {
+      method: 'POST', 
+      body: JSON.stringify(state),
+      headers:{
+        'Content-Type': 'application/json'
+      }
+    }
+    fetch("http://localhost:9000/create-user",sendmethod)
   }
 
   //form function
+
+
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} >
       <label htmlFor="name">Name</label>
       <input
       name="name"
@@ -76,9 +88,23 @@ const RegisterForm = () => {
       onChange={onChange}
       required/>
 
+    <input type="number" 
+    className="im_a_buddy"
+    name="im_a_buddy" 
+    id="im_a_buddy" 
+    value={props.value}
+    onChange={onChange}
+    />
+
       <button type="submit" className="big-button">Send</button>
     </form>
   )
 }
 
+
+
 export default RegisterForm;
+
+
+
+

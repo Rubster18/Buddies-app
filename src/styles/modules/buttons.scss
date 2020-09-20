@@ -1,4 +1,4 @@
-.small-buttons-container{
+  .small-buttons-container{
     display: flex;
     align-items: center;
     margin-right: 30px ;
@@ -11,7 +11,7 @@
     margin-right: 10px;
   }
   
-  a, button {
+  a, button, .button {
     height: 48px;
     width: 86px;
   
@@ -24,6 +24,8 @@
     text-decoration: none;
   
     border: 0;
+
+    cursor: pointer;
   }
   
   .big-button {
@@ -31,8 +33,6 @@
   
     color: $white;
     background-color: $primary;
-  
-    cursor: pointer;
   }
   
   .small-button {

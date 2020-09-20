@@ -6,10 +6,10 @@ const StudentForm = () => {
     return(
         <div>
             <Header />
-            <div className="container-form">
-            <h1> I want a buddy</h1>
-            <h2> I am a social service student </h2>
-            <RegisterForm />
+                <div className="container-form">
+                <h1> I want a buddy</h1>
+                <h2> I want a social service student buddy</h2>
+                <RegisterForm value={0}/>
             </div>
         </div>
     )
