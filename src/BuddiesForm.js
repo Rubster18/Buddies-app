@@ -6,10 +6,17 @@ const BuddiesForm = () =>  {
             <div>
                 <Header />
                 <div className="container-form">
+<<<<<<< HEAD
                 <h1> I want to be a buddy</h1>
                 <h2> I am a social service student </h2>
                 <RegisterForm value={1}/>
             </div>
+=======
+                     <h1> I want to be a buddy</h1>
+                     <h2> I am a social service student </h2>
+                     <RegisterForm boolean="1" />
+                 </div>
+>>>>>>> Dev_Rubster182
             </div>
         );
 };

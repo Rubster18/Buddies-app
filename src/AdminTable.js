@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useState} from 'react';
+import Modal from './Modal';
 import Header from './Header';
 
 const AdminTableFetcher = props => {
@@ -48,6 +49,8 @@ const AdminTableFetcher = props => {
     )
 }
 
+
+
 const AdminTable = props => {
 
 
@@ -61,12 +64,26 @@ const AdminTable = props => {
 
     let itemId = 0;
 
+    const [show, setShow] = useState(false);
+    const [person, setPerson] = useState({});
+
+    const showModal = (person) =>{
+        setPerson(person);
+        setShow(true);
+    }
+
+    const closeModal = () =>{
+        setShow(false);
+    }
+
     return (
         <div>
-            <div className="">
+            <Header />
+            <Modal show={show} closeModal={closeModal} person={person}/>
+            <div className="container-form">
                 <h1>Table of participants</h1>
 
-                <table>
+                <table id="tableId">
                     <thead>
                         <tr>
                             <th className="name-column">Name</th>
@@ -77,17 +94,19 @@ const AdminTable = props => {
                             <th className="buddy-column">Buddy or patient?</th>
                         </tr>
                     </thead>
+
                     <tbody>
-                        {props.data.map( person => {
-                            itemId++;
-                            
-                            let buddy_patient = "patient";
+                    {props.data.map( person => {
+                        itemId++;
+                        
+                        let buddy_patient = "patient";
 
-                            const age = calculate_age(person.dateofbirth);
+                        const age = calculate_age(person.dateofbirth);
 
-                            if(person.im_a_buddy === 1)  buddy_patient = "buddy";
+                        if(person.im_a_buddy === 1)  buddy_patient = "buddy";
 
-                            return (<tr key={itemId} className={buddy_patient}>
+                        return ( 
+                            <tr key={itemId} className={buddy_patient} onClick={()=>showModal(person)}>
                                 <td className="name-column">{person.name}</td>
                                 <td className="age-column">{age}</td>
                                 <td className="email-column">{person.email}</td>
@@ -95,12 +114,12 @@ const AdminTable = props => {
                                 <td className="hobbies-column">{person.hobbiesandinterests}</td>
                                 <td className="buddy-column">{buddy_patient}</td>
                             </tr>
-                        )} )}
+                        )
+                    }) } 
                     </tbody>
                 </table>
             </div>
+
         </div>
     );
 }
-
-export default AdminTableFetcher;
