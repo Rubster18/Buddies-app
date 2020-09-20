@@ -10,11 +10,7 @@ const RegisterForm = (props) => {
     email: "",
     hobbies: "",
     hometown: "",
-<<<<<<< HEAD
     im_a_buddy:0,
-=======
-    boolean: props.boolean
->>>>>>> Dev_Rubster182
   });
   console.log(props);
 
@@ -49,11 +45,7 @@ const RegisterForm = (props) => {
 
 
   return (
-<<<<<<< HEAD
     <form onSubmit={onSubmit} >
-=======
-    <form onSubmit={onSubmit} action="" method="POST">
->>>>>>> Dev_Rubster182
       <label htmlFor="name">Name</label>
       <input
       name="name"
@@ -96,7 +88,6 @@ const RegisterForm = (props) => {
       onChange={onChange}
       required/>
 
-<<<<<<< HEAD
     <input type="number" 
     className="im_a_buddy"
     name="im_a_buddy" 
@@ -104,9 +95,6 @@ const RegisterForm = (props) => {
     value={props.value}
     onChange={onChange}
     />
-=======
-      <input name="hiddenBoolean" value={state.boolean && state.boolean } className="hidden-input"/>
->>>>>>> Dev_Rubster182
 
       <button type="submit" className="big-button">Send</button>
     </form>
@@ -116,8 +104,7 @@ const RegisterForm = (props) => {
 
 
 export default RegisterForm;
-}
 
 
 
-export default RegisterForm;
+

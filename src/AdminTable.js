@@ -36,11 +36,25 @@ const AdminTableFetcher = props => {
                 <Header />
 
                 <div className="container-form">
-                <div className="table-button-container">
-                    <button className="small-button" onClick={seeBuddies}>See Buddies</button>
-                    <button className="small-button" onClick={seePatients}>See Patients</button>
-                    <button className="small-button" onClick={seeAll}>See All</button>
-                </div>
+                    <h1>Table of participants</h1>
+
+                    <form className="table-button-container">
+                        <label className="table-button" onClick={seeBuddies}>
+                            <input type="radio" name="radio-table"/> 
+                            Buddies
+                        </label>
+
+                        <label className="table-button" onClick={seePatients}>
+                            <input type="radio" name="radio-table"/> 
+                            Patients
+                        </label>
+
+                        <label className="table-button" onClick={seeAll}>
+                            <input type="radio" name="radio-table"/> 
+                            All
+                        </label>
+                    </form>
+
                     <AdminTable data={tableData}/>
 
                 </div>
@@ -78,11 +92,8 @@ const AdminTable = props => {
 
     return (
         <div>
-            <Header />
             <Modal show={show} closeModal={closeModal} person={person}/>
-            <div className="container-form">
-                <h1>Table of participants</h1>
-
+            
                 <table id="tableId">
                     <thead>
                         <tr>
@@ -118,8 +129,9 @@ const AdminTable = props => {
                     }) } 
                     </tbody>
                 </table>
-            </div>
 
         </div>
     );
 }
+
+export default AdminTableFetcher;   

@@ -34,16 +34,16 @@
   }
   
   .success-container {
-    background-color: var(--success);
-    color: var(--white);
+    background-color: $success;
+    color: $white;
     border-radius: 4px 4px 0 0;
   
     padding: 50px 0 90px 0;
   }
   
   .contact-you-container {
-    background-color: var(--white);
-    border: 1px solid var(--success);
+    background-color: $white;
+    border: 1px solid $success;
   
     padding: 45px 89px;
   }
