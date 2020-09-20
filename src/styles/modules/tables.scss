@@ -1,5 +1,5 @@
 table {
-    margin-top: 55px;
+    margin-top: 22px;
     border-spacing: 0;
 }
 
@@ -10,6 +10,7 @@ table {
 th, td {
     text-align: center;
     height: 55px;
+    cursor: pointer;
 }
 
 thead {
@@ -30,4 +31,32 @@ td, thead {
 
 .email-column, .hobbies-column, .buddy-column {
     width: 200px;
+}
+
+.table-button-container {
+    width: 300px;
+    margin: 33px 0 0 0;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.table-button {
+    display: flex;
+    align-items: center;
+    height: 48px;
+    padding: 0 8px; 
+    width: auto;
+    border: 2px solid $primary;
+    border-radius: 4px;
+    color: $primary;
+}
+
+.table-button > input {
+    margin: 0 5px 0 0;
+    width: auto;
+}
+
+.table-button > input:checked + label {
+    background-color: pink;
 }

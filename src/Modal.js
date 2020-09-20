@@ -1,24 +1,39 @@
+  
 import React from 'react';
 
 
 
 const Modal = ({person, show, closeModal}) => {
 
+  function calculate_age(dateofbirth) { 
+    const date = new Date(dateofbirth);
+    var diff_ms = Date.now() - date.getTime();
+    var age_dt = new Date(diff_ms); 
+  
+    return Math.abs(age_dt.getUTCFullYear() - 1970);
+  }
+
+  const age = calculate_age(person.dateofbirth);
+  let buddy_patient = ""; 
+
+  person.im_a_buddy = 1 ? buddy_patient = "Buddy" : buddy_patient = "Patient";
+
     console.log(show)
+    console.log(person)
    if (!show) {
      return null;
    }
     return(
       <div className="modal-box" id="modal-box">
          <div className="modalcontainer">
-            <h1 className="modal-head">{person.name}</h1>
+            <h2 className="modal-head">{person.name}</h2>
             <div className="close-btn" onClick={closeModal}> x </div>
             <div className="modal-props">
 
               <div className="modalp">
                 <div className="textrows">
                 <p> <b>Leeftijd: </b> </p>
-                <p className="underlined">{person.age}</p>
+                <p className="underlined">{age}</p>
                </div>
               </div>
               <div className="modalp">
@@ -38,7 +53,7 @@ const Modal = ({person, show, closeModal}) => {
               <div className="modalp">
                 <div className="textrows">
                   <p><b>Maatje of patiënt?</b> </p>
-                  <p className="underlined"> {person.buddy_patient}</p> 
+                  <p className="underlined"> {buddy_patient}</p> 
                 </div>
               </div>
 
@@ -49,6 +64,20 @@ const Modal = ({person, show, closeModal}) => {
                 </div>
               </div>
           </div>
+          
+
+          <div className="btn-container">
+                <button className="small-button delete"> Delete </button>
+                <button className="match-btn" > Move to match list</button>
+            </div>
+
+         </div>
+        <div className="overlay" onClick={closeModal}></div>
+      </div>
+    )
+  };
+
+  export default Modal;
           
 
           <div className="btn-container">

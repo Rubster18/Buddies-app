@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import Modal from './Modal';
 import Header from './Header';
+import HeaderAdmin from './HeaderAdmin';
 
 const AdminTableFetcher = props => {
     const [tableData, setTableData] = React.useState(null);
     const [mainArray, setMainArray] = React.useState(null);
-}
 
     const seeBuddies = () => {
         const filteredData = mainArray.filter( element => element.im_a_buddy === 1);
@@ -29,25 +29,41 @@ const AdminTableFetcher = props => {
     }, []);
 
     return (
-        
+
         !tableData ? 
             (<p>Loading...</p>) 
         : (
             <div className="">
-                <Header />
+                <HeaderAdmin />
 
                 <div className="container-form">
-                <div className="table-button-container">
-                    <button className="small-button" onClick={seeBuddies}>See Buddies</button>
-                    <button className="small-button" onClick={seePatients}>See Patients</button>
-                    <button className="small-button" onClick={seeAll}>See All</button>
-                </div>
+                    <h1>Table of participants</h1>
+
+                    <form className="table-button-container">
+                        <label className="table-button" onClick={seeBuddies}>
+                            <input type="radio" name="radio-table"/> 
+                            Buddies
+                        </label>
+
+                        <label className="table-button" onClick={seePatients}>
+                            <input type="radio" name="radio-table"/> 
+                            Patients
+                        </label>
+
+                        <label className="table-button" onClick={seeAll}>
+                            <input type="radio" name="radio-table"/> 
+                            All
+                        </label>
+                    </form>
+
                     <AdminTable data={tableData}/>
 
                 </div>
             </div> 
         )
     )
+}
+
 
 
 const AdminTable = props => {
@@ -62,32 +78,23 @@ const AdminTable = props => {
     }
 
     let itemId = 0;
-    
-    
-        const modalState = () => {
-        const [show, setShow] = useState(false);
-        const [person, setPerson] = useState({});
 
+    const [show, setShow] = useState(false);
+    const [person, setPerson] = useState({});
 
-        const showModal = (person) =>{
-          setPerson(person)
-          setShow(true)
-        }
-        const closeModal = () =>{
-            setShow(false)
-        }
-    
-    
+    const showModal = (person) =>{
+        setPerson(person);
+        setShow(true);
+    }
+
+    const closeModal = () =>{
+        setShow(false);
+    }
+
     return (
         <div>
-
-
-            <div className="container-form">
-            <div className="">
-                <h1>Table of participants</h1>
-
-                <Modal show={show} closeModal={closeModal} person={person}/>
-
+            <Modal show={show} closeModal={closeModal} person={person}/>
+            
                 <table id="tableId">
                     <thead>
                         <tr>
@@ -99,17 +106,19 @@ const AdminTable = props => {
                             <th className="buddy-column">Buddy or patient?</th>
                         </tr>
                     </thead>
+
                     <tbody>
+                    {props.data.map( person => {
+                        itemId++;
+                        
+                        let buddy_patient = "patient";
 
-                        {props.data.map( person => {
-                            itemId++;
-                            
-                            let buddy_patient = "patient";
+                        const age = calculate_age(person.dateofbirth);
 
-                            const age = calculate_age(person.dateofbirth);
+                        if(person.im_a_buddy === 1)  buddy_patient = "buddy";
 
-                            if(person.im_a_buddy === 1)  buddy_patient = "buddy";
-                            return (<tr key={itemId} className={buddy_patient} onClick={()=>showModal(person, closeModal)}>
+                        return ( 
+                            <tr key={itemId} className={buddy_patient} onClick={()=>showModal(person)}>
                                 <td className="name-column">{person.name}</td>
                                 <td className="age-column">{age}</td>
                                 <td className="email-column">{person.email}</td>
@@ -117,14 +126,13 @@ const AdminTable = props => {
                                 <td className="hobbies-column">{person.hobbiesandinterests}</td>
                                 <td className="buddy-column">{buddy_patient}</td>
                             </tr>
-                        )} )}
+                        )
+                    }) } 
                     </tbody>
                 </table>
-            </div>
-        </div>
-    </div>
-    );
-    }
 
-}   
-export default AdminTableFetcher;
+        </div>
+    );
+}
+
+export default AdminTableFetcher;   
