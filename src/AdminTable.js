@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import Modal from './Modal';
-import Header from './Header';
 import HeaderAdmin from './HeaderAdmin';
 
 const AdminTableFetcher = props => {
