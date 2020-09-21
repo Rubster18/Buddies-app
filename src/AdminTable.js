@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import Modal from './Modal';
-import Header from './Header';
 import HeaderAdmin from './HeaderAdmin';
+
+const baseUrl = "http://localhost:9000/"
 
 const AdminTableFetcher = props => {
     const [tableData, setTableData] = React.useState(null);
