@@ -1,13 +1,36 @@
 import React from 'react';
 
+const Modal = ({person, show, closeModal, updateData}) => {
 
+  
+  const disableUser = (person) => {
+    
+    const url = "http://localhost:9000/disable-user";
+    const data = {
+      isBuddy: person.im_a_buddy,
+      id: person.id
+    }
 
-const Modal = ({person, show, closeModal}) => {
+    fetch(url, {
+      method: 'PUT',
+      // body: data,
+      body: JSON.stringify(data), 
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    })
+    .catch( error => console.error("Error: ", error))
+    .then( response => console.log("Success:", response) )
+    
+    // updateData(data.id, data.isBuddy);
+    closeModal();
+  }
 
   function calculate_age(dateofbirth) { 
     const date = new Date(dateofbirth);
-    var diff_ms = Date.now() - date.getTime();
-    var age_dt = new Date(diff_ms); 
+    const diff_ms = Date.now() - date.getTime();
+    const age_dt = new Date(diff_ms); 
   
     return Math.abs(age_dt.getUTCFullYear() - 1970);
   }
@@ -15,10 +38,10 @@ const Modal = ({person, show, closeModal}) => {
   const age = calculate_age(person.dateofbirth);
   let buddy_patient = ""; 
 
-  person.im_a_buddy = 1 ? buddy_patient = "Buddy" : buddy_patient = "Patient";
+  person.im_a_buddy === 1 ? buddy_patient = "Buddy" : buddy_patient = "Patient";
 
-    console.log(show)
-    console.log(person)
+    // console.log(show)
+    // console.log(person)
    if (!show) {
      return null;
    }
@@ -59,14 +82,14 @@ const Modal = ({person, show, closeModal}) => {
               <div className="hobbiebox">
                 <div className="textrows">
                   <p> <b> hobby's en interesses:</b></p> 
-                  <p>{person.hobbies}</p>
+                  <p>{person.hobbiesandinterests}</p>
                 </div>
               </div>
           </div>
           
 
           <div className="btn-container">
-                <button className="small-button delete"> Delete </button>
+                <button className="small-button delete" onClick={() => disableUser(person)}> Delete </button>
                 <button className="match-btn" > Move to match list</button>
             </div>
 

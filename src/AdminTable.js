@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import Modal from './Modal';
 import HeaderAdmin from './HeaderAdmin';
 
-const baseUrl = "http://localhost:9000/"
+const baseUrl = "http://localhost:9000/";
 
 const AdminTableFetcher = props => {
     const [tableData, setTableData] = React.useState(null);
@@ -22,8 +22,19 @@ const AdminTableFetcher = props => {
         setTableData(mainArray);
     }
 
+    const updateTableData = (id, buddy) => {
+        console.log("Updatetabledata >>>> ", "el id es: ",id,"el buddy es", buddy);
+
+        // console.log("table data >>>>>>", tableData);
+        // const position = tableData.findIndex(element => { return element.id === id && element.buddy === buddy});
+        // console.log("The position of the item is: ", position);
+
+        setTableData([]);
+    }
+
     React.useEffect(() => {
-        fetch("http://localhost:9000/get-table")
+        console.log("I'm fetching")
+        fetch(`${baseUrl}get-table`)
             .then(response => response.json())
             .then(data => {setTableData(data); setMainArray(data)})
             .catch(rejected => console.log(rejected))
@@ -57,7 +68,7 @@ const AdminTableFetcher = props => {
                         </label>
                     </form>
 
-                    <AdminTable data={tableData}/>
+                    <AdminTable data={tableData} updateData={updateTableData}/>
 
                 </div>
             </div> 
@@ -69,6 +80,7 @@ const AdminTableFetcher = props => {
 
 const AdminTable = props => {
 
+    // props.updateData("AdminTable");
 
     function calculate_age(dateofbirth) { 
         const date = new Date(dateofbirth);
@@ -83,7 +95,8 @@ const AdminTable = props => {
     const [show, setShow] = useState(false);
     const [person, setPerson] = useState({});
 
-    const showModal = (person) =>{
+    const showModal = (person, buddy_patient) =>{
+        console.log("I'm receiving the modal person >>>>>", person, " buddy >>>>>>>>>", buddy_patient);
         setPerson(person);
         setShow(true);
     }
@@ -94,7 +107,7 @@ const AdminTable = props => {
 
     return (
         <div>
-            <Modal show={show} closeModal={closeModal} person={person}/>
+            <Modal show={show} closeModal={closeModal} person={person} updateData={props.updateData}/>
             
                 <table id="tableId">
                     <thead>
@@ -110,6 +123,7 @@ const AdminTable = props => {
 
                     <tbody>
                     {props.data.map( person => {
+                        
                         itemId++;
                         
                         let buddy_patient = "patient";
