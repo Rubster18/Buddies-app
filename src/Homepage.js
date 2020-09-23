@@ -2,21 +2,18 @@ import React from "react";
 import Header from "./Header";
 import Button from "./Button";
 import Footer from "./Footer";
-import Viejita from "./Images/viejita.png"
-
 
 const Homepage = () => {
     return (
         <div className="homepage">
             <Header />
                 <div className="jumbotroncontainer">
-                    <h1 className="white-text">Welkom op de beelbuddy</h1> 
-                    <h2 className="white-text"> Leuk dat je interesse hebt in het worden van een buddy!</h2>
-                    <img src={Viejita} className="jumbotron-image" alt="someone sharing with a patient with a smartphone"/>
-                    <div className="homepage-button-container">
-                        <Button route="/BuddiesForm" buttonType="big" text="Ik ben een maatje" />
-                        <Button route="/StudentForm" buttonType="big" text="Ik wil een maatje" />
-                    </div>
+                        <h1 className="white-text">Welkom op de beelbuddy</h1> 
+                        <h2 className="white-text"> Leuk dat je interesse hebt in het worden van een buddy!</h2>
+                        <div className="homepage-button-container">
+                            <Button route="/BuddiesForm" buttonType="big" text="Ik ben een maatje" />
+                            <Button route="/StudentForm" buttonType="big" text="Ik wil een maatje" />
+                        </div>
                 </div>
                 <div className="aboutus">
                     <h2 className="title"> Beelbuddy </h2>
