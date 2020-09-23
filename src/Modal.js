@@ -25,6 +25,7 @@ const Modal = ({person, show, closeModal, updateData}) => {
     
     // updateData(data.id, data.isBuddy);
     closeModal();
+    window.location.reload();
   }
 
   function calculate_age(dateofbirth) { 
@@ -45,7 +46,7 @@ const Modal = ({person, show, closeModal, updateData}) => {
    if (!show) {
      return null;
    }
-    return(
+    return (
       <div className="modal-box" id="modal-box">
          <div className="modalcontainer">
             <h2 className="modal-head">{person.name}</h2>
@@ -98,5 +99,12 @@ const Modal = ({person, show, closeModal, updateData}) => {
       </div>
     )
   };
+
+/*  
+------- USE THIS WHEN DELETE + MATCH FUNTIONALITIES ARE IMPLEMENTED ----------
+<div className="btn-container"> 
+  <button className="small-button delete"> Verwijderen </button>
+  <button className="match-btn" > Ga naar de matchlijst </button>
+</div> */
 
   export default Modal;

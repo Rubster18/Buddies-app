@@ -61,3 +61,7 @@ td, thead {
 .table-button > input:checked + label {
     background-color: pink;
 }
+
+label.table-button {
+    text-shadow: none;
+}

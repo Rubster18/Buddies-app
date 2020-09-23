@@ -60,5 +60,101 @@ label {
   .im_a_buddy {
     display: none;
   }
+
+  .formwrapper {
+    position: absolute;
+    -webkit-animation: fadein 0.25s; /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: fadein 0.25s; /* Firefox < 16 */
+     -ms-animation: fadein 0.25s; /* Internet Explorer */
+      -o-animation: fadein 0.25s; /* Opera < 12.1 */
+         animation: fadein 0.25s;
+    z-index: -1;
+    width: 30%;
+    left: 35%;
+    top: 38%;
+    border-radius: 10px;
+  }
     
+  .fadein1 {
+    -webkit-animation: fadein 1.50s; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: fadein 1.50s; /* Firefox < 16 */
+        -ms-animation: fadein 1.50s; /* Internet Explorer */
+         -o-animation: fadein 1.50s; /* Opera < 12.1 */
+            animation: fadein 1.50s;
+            opacity: 75%;
+}
+
+.fadein2 {
+  -webkit-animation: fadein 1.75s; /* Safari, Chrome and Opera > 12.1 */
+     -moz-animation: fadein 1.75s; /* Firefox < 16 */
+      -ms-animation: fadein 1.75s; /* Internet Explorer */
+       -o-animation: fadein 1.75s; /* Opera < 12.1 */
+          animation: fadein 1.75s;
+          opacity: 75%;
+}
+
+.fadein3 {
+  -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+     -moz-animation: fadein 2s; /* Firefox < 16 */
+      -ms-animation: fadein 2s; /* Internet Explorer */
+       -o-animation: fadein 2s; /* Opera < 12.1 */
+          animation: fadein 2s;
+          opacity: 75%;
+}
+
+.fadein4 {
+  -webkit-animation: fadein 2.25s; /* Safari, Chrome and Opera > 12.1 */
+     -moz-animation: fadein 2.25s; /* Firefox < 16 */
+      -ms-animation: fadein 2.25s; /* Internet Explorer */
+       -o-animation: fadein 2.25s; /* Opera < 12.1 */
+          animation: fadein 2.25s;
+          opacity: 75%;
+}
+
+.fadein5 {
+  -webkit-animation: fadein 2.50s; /* Safari, Chrome and Opera > 12.1 */
+     -moz-animation: fadein 2.50s; /* Firefox < 16 */
+      -ms-animation: fadein 2.50s; /* Internet Explorer */
+       -o-animation: fadein 2.50s; /* Opera < 12.1 */
+          animation: fadein 2.50s;
+          opacity: 75%;
+}
+
+@keyframes fadein {
+    0% { opacity: 0%; }
+    100%  { opacity: 75%; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+  0% { opacity: 0%; }
+  100%  { opacity: 75%; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+  0% { opacity: 0%; }
+  100%  { opacity: 75%; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+  0% { opacity: 0%; }
+  100%  { opacity: 75%; }
+} 
+
+  .formitself{
+    z-index: 2;
+    display:flex;
+    flex-direction: column;
+    
+
+  }
+
+  label {
+    color: $white;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  }
+
+
   
