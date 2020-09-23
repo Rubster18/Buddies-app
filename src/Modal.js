@@ -65,15 +65,19 @@ const Modal = ({person, show, closeModal}) => {
           </div>
           
 
-          <div className="btn-container">
-                <button className="small-button delete"> Delete </button>
-                <button className="match-btn" > Move to match list</button>
-            </div>
+
 
          </div>
         <div className="overlay" onClick={closeModal}></div>
       </div>
     )
   };
+
+/*  
+------- USE THIS WHEN DELETE + MATCH FUNTIONALITIES ARE IMPLEMENTED ----------
+<div className="btn-container"> 
+  <button className="small-button delete"> Verwijderen </button>
+  <button className="match-btn" > Ga naar de matchlijst </button>
+</div> */
 
   export default Modal;
