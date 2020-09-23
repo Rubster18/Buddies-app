@@ -1,7 +1,21 @@
 import React from 'react';
 import Header from './Header';
+import auth from './Auth';
+import { useHistory } from 'react-router-dom';
 
-const Login = () => {
+const Login = (props) => {
+    const history = useHistory();
+
+    const handleLoging =(e) => {
+
+        e.preventDefault();
+        auth.login(()=>{
+            history.push("/AdminTable");
+        });
+        
+        console.log(auth.authenticated)
+    }
+    
     return (
         <div>
             <Header />
@@ -11,13 +25,13 @@ const Login = () => {
                 <h2>Access for administrators</h2>
 
                 <form>
-                    <label for="email">Email</label>
+                    <label htmlFor="email">Email</label>
                     <input type="text" name="email" />
 
-                    <label for="password">Password</label>
+                    <label htmlFor="password">Password</label>
                     <input type="password" name="password"/>
 
-                    <button type="submit" className="big-button">Login</button>
+                    <button type="submit" className="big-button" onClick={handleLoging}>Login</button>
                 </form>
             </div>
         </div>
