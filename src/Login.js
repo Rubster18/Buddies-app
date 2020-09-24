@@ -22,13 +22,13 @@ const Login = (props) => {
 
             <div className="container-form">
                 <h1>Login</h1>
-                <h2>Access for administrators</h2>
+                <h2>Toegang voor beheerders</h2>
 
                 <form>
                     <label htmlFor="email">Email</label>
                     <input type="text" name="email" />
 
-                    <label htmlFor="password">Password</label>
+                    <label htmlFor="password">Wachtwoord</label>
                     <input type="password" name="password"/>
 
                     <button type="submit" className="big-button" onClick={handleLoging}>Login</button>
