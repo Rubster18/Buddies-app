@@ -53,3 +53,17 @@ CREATE TABLE matches (
 	CONSTRAINT fk_buddyid FOREIGN KEY (buddyid) REFERENCES buddies(id),
 	CONSTRAINT fk_patientid FOREIGN KEY (patient_id) REFERENCES patients(id)
 );
+
+
+/* inserting elements*/
+
+INSERT INTO buddies ("name",dateofbirth,email,hometown,hobbiesandinterests) VALUES ('Antony Leans', '1993-02-23','leantony@thonet.uk','Amsterdam','travel',true);
+
+
+INSERT INTO buddies ("name",dateofbirth,email,hometown,hobbiesandinterests) VALUES ('Jhon Clavan', '1994-01-26','jhon@thonet.es','Ultrecht','eat pizza',true);
+
+
+INSERT INTO buddies ("name",dateofbirth,email,hometown,hobbiesandinterests) VALUES ('Marcelo Dongobud', '1988-10-13','MarceloGon@thonet.uk','Amsterdam','running',true);
+
+
+INSERT INTO buddies ("name",dateofbirth,email,hometown,hobbiesandinterests) VALUES ('Antony Leans', '1993-02-23','leantony@thonet.uk','Amsterdam','travel',true);

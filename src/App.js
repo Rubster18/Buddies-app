@@ -5,6 +5,7 @@ import StudentForm from "./StudentForm"
 import Homepage from './Homepage';
 import ThankYou from './ThankYou';
 import Login from './Login';
+import ProtectedRoute from './ProtectedRoute';
 
 import {
   BrowserRouter as Router,
@@ -13,6 +14,8 @@ import {
 } from 'react-router-dom';
 import AdminTable from './AdminTable';
 import Footer from './Footer';
+
+
 
 //Main Site
 function App(){
@@ -36,9 +39,10 @@ function App(){
             <Route path="/Login">
               <Login/>
             </Route>
-            <Route path="">
-              <AdminTable/>
-            </Route>
+            <ProtectedRoute 
+              path="/AdminTable"
+              component={AdminTable}
+            />
           </Switch>
       </Router>
       
