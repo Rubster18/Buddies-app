@@ -1,10 +1,9 @@
 import React from 'react';
 
-const Modal = ({person, show, closeModal, updateData}) => {
+const Modal = ({person, show, closeModal, tableData}) => {
 
-  
+  //Function to disable a user from the modal
   const disableUser = (person) => {
-    
     const url = "http://localhost:9000/disable-user";
     const data = {
       isBuddy: person.im_a_buddy,
@@ -13,7 +12,6 @@ const Modal = ({person, show, closeModal, updateData}) => {
 
     fetch(url, {
       method: 'PUT',
-      // body: data,
       body: JSON.stringify(data), 
       headers: {
         'Content-Type': 'application/json',
@@ -23,11 +21,11 @@ const Modal = ({person, show, closeModal, updateData}) => {
     .catch( error => console.error("Error: ", error))
     .then( response => console.log("Success:", response) )
     
-    // updateData(data.id, data.isBuddy);
     closeModal();
     window.location.reload();
   }
 
+  //Function to calculate the age based on the dateofbirth
   function calculate_age(dateofbirth) { 
     const date = new Date(dateofbirth);
     const diff_ms = Date.now() - date.getTime();
@@ -36,16 +34,26 @@ const Modal = ({person, show, closeModal, updateData}) => {
     return Math.abs(age_dt.getUTCFullYear() - 1970);
   }
 
-  const age = calculate_age(person.dateofbirth);
-  let buddy_patient = ""; 
+  // const userPosition = tableData.indexOf(person);
+  // const tableWithoutUser = tableData.splice(userPosition, 1);
+  // console.log("La tabla sin el user ahora es: >>>", tableWithoutUser);
 
+  const age = calculate_age(person.dateofbirth);
+  
+  //Determine if the person is a buddy or a patient
+  let buddy_patient = ""; 
   person.im_a_buddy === 1 ? buddy_patient = "Buddy" : buddy_patient = "Patient";
 
-    // console.log(show)
-    // console.log(person)
+  //I for the map of the array 
+  let i = 1;
+  
+  console.log("Table data es: ", tableData);
+    
    if (!show) {
+     //Don't show the modal if the flag is false
      return null;
    }
+    //Show the modal if required
     return (
       <div className="modal-box" id="modal-box">
          <div className="modalcontainer">
@@ -53,37 +61,58 @@ const Modal = ({person, show, closeModal, updateData}) => {
             <div className="close-btn" onClick={closeModal}> x </div>
             <div className="modal-props">
 
-              <div className="modalp">
+              <div className="modalp underlined">
                 <div className="textrows">
                 <p> <b>Leeftijd: </b> </p>
-                <p className="underlined">{age}</p>
+                <p>{age}</p>
                </div>
               </div>
-              <div className="modalp">
+              <div className="modalp underlined">
                 <div className="textrows">
                   <p> <b>Email:</b></p>
-                  <p className="underlined">{person.email}</p>
+                  <p>{person.email}</p>
                 </div>
               </div>
 
-              <div className="modalp">
+              <div className="modalp underlined">
                 <div className="textrows">
                   <p> <b>Geboorteplaats:</b> </p> 
-                  <p className="underlined">{person.hometown}</p>
+                  <p>{person.hometown}</p>
                 </div>
               </div>
 
-              <div className="modalp">
+              <div className="modalp underlined">
                 <div className="textrows">
                   <p><b>Maatje of patiënt?</b> </p>
-                  <p className="underlined"> {buddy_patient}</p> 
+                  <p className=""> {buddy_patient}</p> 
                 </div>
               </div>
 
-              <div className="hobbiebox">
+              <div className="hobbiebox underlined">
                 <div className="textrows">
                   <p> <b> hobby's en interesses:</b></p> 
                   <p>{person.hobbiesandinterests}</p>
+                </div>
+              </div>
+
+              <div className="hobbiebox underlined">
+                <div className="textrows">
+                  <p> <b>Match</b></p> 
+                  <select name="selectMatch" defaultValue={'DEFAULT'}>
+                    {person.matchname ? <option value='DEFAULT' disabled>{person.matchname}</option> : <option disabled value={0}>Select</option>}
+                    
+                    {  
+                      tableData.map( element => {
+                        if(element.im_a_buddy === person.im_a_buddy || (element.id === person.id && element.im_a_buddy === person.im_a_buddy)) {
+                          i++;
+                          return null;
+                        }
+                        if (element.matchname) 
+                        i++;
+                        return <option value={element.id} key={i}>{element.name} ({person.im_a_buddy === 0? "Buddy" : "Patient"})</option>
+                      })
+                    }
+                  </select>
                 </div>
               </div>
           </div>

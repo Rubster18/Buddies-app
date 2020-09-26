@@ -18,18 +18,18 @@ const AdminTableFetcher = props => {
         setTableData(filteredData);
     }
 
-    const seeAll = () => {
-        setTableData(mainArray);
+    const seeMatched = () => {
+        const filteredData = mainArray.filter( element => element.matchname !== null);
+        setTableData(filteredData);
     }
 
-    const updateTableData = (id, buddy) => {
-        console.log("Updatetabledata >>>> ", "el id es: ",id,"el buddy es", buddy);
+    const seeUnmatched = () => {
+        const filteredData = mainArray.filter( element => element.matchname === null);
+        setTableData(filteredData);
+    }
 
-        // console.log("table data >>>>>>", tableData);
-        // const position = tableData.findIndex(element => { return element.id === id && element.buddy === buddy});
-        // console.log("The position of the item is: ", position);
-
-        setTableData([]);
+    const seeAll = () => {
+        setTableData(mainArray);
     }
 
     React.useEffect(() => {
@@ -66,9 +66,19 @@ const AdminTableFetcher = props => {
                             <input type="radio" name="radio-table"/> 
                             All
                         </label>
+
+                        <label className="table-button" onClick={seeMatched}>
+                            <input type="radio" name="radio-table"/> 
+                            Matched
+                        </label>
+
+                        <label className="table-button" onClick={seeUnmatched}>
+                            <input type="radio" name="radio-table"/> 
+                            Un-matched
+                        </label>
                     </form>
 
-                    <AdminTable data={tableData} updateData={updateTableData}/>
+                    <AdminTable data={tableData}/>
 
                 </div>
             </div> 
@@ -107,7 +117,7 @@ const AdminTable = props => {
 
     return (
         <div>
-            <Modal show={show} closeModal={closeModal} person={person} updateData={props.updateData}/>
+            <Modal show={show} closeModal={closeModal} person={person} tableData={props.data}/>
             
                 <table id="tableId">
                     <thead>
@@ -118,6 +128,7 @@ const AdminTable = props => {
                             <th className="hometown-column">Hometown</th>
                             <th className="hobbies-column">Hobbies/Interest</th>
                             <th className="buddy-column">Buddy or patient?</th>
+                            <th className="name-column">Match</th>
                         </tr>
                     </thead>
 
@@ -127,10 +138,13 @@ const AdminTable = props => {
                         itemId++;
                         
                         let buddy_patient = "patient";
+                        if(person.im_a_buddy === 1)  buddy_patient = "buddy";
+
+                        let matchName = "-";
+                        if(person.matchname) matchName = person.matchname;
 
                         const age = calculate_age(person.dateofbirth);
 
-                        if(person.im_a_buddy === 1)  buddy_patient = "buddy";
 
                         return ( 
                             <tr key={itemId} className={buddy_patient} onClick={()=>showModal(person)}>
@@ -140,6 +154,7 @@ const AdminTable = props => {
                                 <td className="hometown-column">{person.hometown}</td>
                                 <td className="hobbies-column">{person.hobbiesandinterests}</td>
                                 <td className="buddy-column">{buddy_patient}</td>
+                                <td className="name-column">{matchName}</td>
                             </tr>
                         )
                     }) } 

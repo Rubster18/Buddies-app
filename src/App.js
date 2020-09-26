@@ -13,9 +13,6 @@ import {
   Route
 } from 'react-router-dom';
 import AdminTable from './AdminTable';
-import Footer from './Footer';
-
-
 
 //Main Site
 function App(){
@@ -45,7 +42,7 @@ function App(){
             />
           </Switch>
       </Router>
-      
+            
     </div>
   );
 }
