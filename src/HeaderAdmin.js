@@ -7,7 +7,7 @@ const  HeaderAdmin = () => {
         <div>
             <header>
                 <div className="header-flex-container">
-                <a href="/" className=" logo"><img src={propuesta2} alt="beelbuddy logo" className="logo"/></a>
+                    <a href="/" className=" logo"><img src={propuesta2} alt="beelbuddy logo" className="logo"/></a>
 
                     <div className="small-buttons-container">
                         <Button route="/Login" buttonType="small" text="Logout"/>

@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import Modal from './Modal';
 import HeaderAdmin from './HeaderAdmin';
 
+const baseUrl = "http://localhost:9000/";
+
 const AdminTableFetcher = props => {
     const [tableData, setTableData] = React.useState(null);
     const [mainArray, setMainArray] = React.useState(null);
@@ -16,12 +18,23 @@ const AdminTableFetcher = props => {
         setTableData(filteredData);
     }
 
+    const seeMatched = () => {
+        const filteredData = mainArray.filter( element => element.matchname !== null);
+        setTableData(filteredData);
+    }
+
+    const seeUnmatched = () => {
+        const filteredData = mainArray.filter( element => element.matchname === null);
+        setTableData(filteredData);
+    }
+
     const seeAll = () => {
         setTableData(mainArray);
     }
 
     React.useEffect(() => {
-        fetch("http://localhost:9000/get-table")
+        console.log("I'm fetching")
+        fetch(`${baseUrl}get-table`)
             .then(response => response.json())
             .then(data => {setTableData(data); setMainArray(data)})
             .catch(rejected => console.log(rejected))
@@ -53,8 +66,18 @@ const AdminTableFetcher = props => {
                             <input type="radio" name="radio-table"/> 
                             All
                         </label>
-                    </form>
+{/*
+                        <label className="table-button" onClick={seeMatched}>
+                            <input type="radio" name="radio-table"/> 
+                            Matched
+                        </label>
 
+                        <label className="table-button" onClick={seeUnmatched}>
+                            <input type="radio" name="radio-table"/> 
+                            Un-matched
+                        </label>
+*/}
+                    </form>
                     <AdminTable data={tableData}/>
 
                 </div>
@@ -67,6 +90,7 @@ const AdminTableFetcher = props => {
 
 const AdminTable = props => {
 
+    // props.updateData("AdminTable");
 
     function calculate_age(dateofbirth) { 
         const date = new Date(dateofbirth);
@@ -81,7 +105,8 @@ const AdminTable = props => {
     const [show, setShow] = useState(false);
     const [person, setPerson] = useState({});
 
-    const showModal = (person) =>{
+    const showModal = (person, buddy_patient) =>{
+        console.log("I'm receiving the modal person >>>>>", person, " buddy >>>>>>>>>", buddy_patient);
         setPerson(person);
         setShow(true);
     }
@@ -92,7 +117,7 @@ const AdminTable = props => {
 
     return (
         <div>
-            <Modal show={show} closeModal={closeModal} person={person}/>
+            <Modal show={show} closeModal={closeModal} person={person} tableData={props.data}/>
             
                 <table id="tableId">
                     <thead>
@@ -103,18 +128,23 @@ const AdminTable = props => {
                             <th className="hometown-column">Hometown</th>
                             <th className="hobbies-column">Hobbies/Interest</th>
                             <th className="buddy-column">Buddy or patient?</th>
+                            {/* <th className="name-column">Match</th> */}
                         </tr>
                     </thead>
 
                     <tbody>
                     {props.data.map( person => {
+                        
                         itemId++;
                         
                         let buddy_patient = "patient";
+                        if(person.im_a_buddy === 1)  buddy_patient = "buddy";
+
+                        let matchName = "-";
+                        if(person.matchname) matchName = person.matchname;
 
                         const age = calculate_age(person.dateofbirth);
 
-                        if(person.im_a_buddy === 1)  buddy_patient = "buddy";
 
                         return ( 
                             <tr key={itemId} className={buddy_patient} onClick={()=>showModal(person)}>
@@ -124,6 +154,7 @@ const AdminTable = props => {
                                 <td className="hometown-column">{person.hometown}</td>
                                 <td className="hobbies-column">{person.hobbiesandinterests}</td>
                                 <td className="buddy-column">{buddy_patient}</td>
+                                {/* <td className="name-column">{matchName}</td> */}
                             </tr>
                         )
                     }) } 

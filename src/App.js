@@ -6,7 +6,8 @@ import Homepage from './Homepage';
 import ThankYou from './ThankYou';
 import Login from './Login';
 import Footer from "./Footer";
-
+import BrokenLink from './BrokenLink'
+import ProtectedRoute from './ProtectedRoute';
 
 import {
   BrowserRouter as Router,
@@ -38,8 +39,12 @@ function App(){
             <Route path="/Login">
               <Login/>
             </Route>
-            <Route path="">
-              <AdminTable/>
+            <ProtectedRoute 
+              path="/AdminTable"
+              component={AdminTable}
+            />
+            <Route path="*">
+              <BrokenLink/>
             </Route>
           </Switch>
       </Router>

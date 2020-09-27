@@ -12,7 +12,11 @@
   z-index: 2;
   display: flex;
   flex-wrap: wrap; 
-  padding-left: 40px;
+  padding: 0 40px;
+
+  p {
+    margin: 10px 0;
+  }
 
 }
 
@@ -36,15 +40,15 @@
 .modalp {
   display: flex;
   flex-direction: column;
-  position: relative;
   width: 203px;
-  height: 58px;
+
+  .modalp:last-child { padding-bottom: 10px; }
 }
 
 .modal-head{
   width:100%;
   text-align: left;
-  margin: 69px 32px 0 32px !important;
+  margin: 69px 32px 0 18px !important;
 }
 
 .btn-container {
@@ -54,7 +58,7 @@
     width:320px;
     margin: 32px 0 10px 0;
     height: 48px;
-    padding-left: 30px;
+    padding-left: 10px;
 }
 
 .delete {
@@ -96,6 +100,7 @@
   // border-bottom: 2px solid #c4c4c4;
   border-bottom: 0%;
   width: 438px;
+  height: fit-content;
 }
 
 .textrows {

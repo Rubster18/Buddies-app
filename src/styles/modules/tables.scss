@@ -19,6 +19,9 @@ thead {
 
 td, thead {
     border-bottom: 1px solid $secondary;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .name-column, .hometown-column {
@@ -34,7 +37,7 @@ td, thead {
 }
 
 .table-button-container {
-    width: 300px;
+    width: 580px;
     margin: 33px 0 0 0;
     display: flex;
     justify-content: space-between;
@@ -45,11 +48,12 @@ td, thead {
     display: flex;
     align-items: center;
     height: 48px;
-    padding: 0 8px; 
+    padding: 0 12px; 
     width: auto;
     border: 2px solid $primary;
     border-radius: 4px;
     color: $primary;
+    cursor: pointer;
 }
 
 .table-button > input {
@@ -59,4 +63,29 @@ td, thead {
 
 .table-button > input:checked + label {
     background-color: pink;
+}
+
+label.table-button {
+    text-shadow: none;
+}
+
+th:first-child {
+    padding-left: 20px;
+}
+
+th:last-child {
+    padding-right: 20px;
+}
+
+select {
+    width: 100%;
+    border: none;
+    background: none;
+    height: 26px;
+    font-size: 16px;
+
+}
+
+select:focus {
+    outline: none; 
 }
