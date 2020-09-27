@@ -1,7 +1,8 @@
 import React from 'react';
+import {useHistory} from 'react-router-dom'
 
 const Modal = ({person, show, closeModal, tableData}) => {
-
+  let history = useHistory();
   //Function to disable a user from the modal
   const disableUser = (person) => {
     const url = "http://localhost:9000/disable-user";
@@ -9,6 +10,7 @@ const Modal = ({person, show, closeModal, tableData}) => {
       isBuddy: person.im_a_buddy,
       id: person.id
     }
+    
 
     fetch(url, {
       method: 'PUT',
@@ -22,7 +24,9 @@ const Modal = ({person, show, closeModal, tableData}) => {
     .then( response => console.log("Success:", response) )
     
     closeModal();
-    window.location.reload();
+    history.push("/AdminTable");
+
+    //window.location.reload();
   }
 
   //Function to calculate the age based on the dateofbirth
