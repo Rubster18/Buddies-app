@@ -1,6 +1,8 @@
 label {
     display: block;
     margin: 16px 0 10px 0;
+    // color: $white;
+    // text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
   }
   
   input, textarea {
@@ -149,11 +151,6 @@ label {
     flex-direction: column;
     
 
-  }
-
-  label {
-    color: $white;
-    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
   }
 
 

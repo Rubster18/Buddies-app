@@ -1,9 +1,11 @@
 import React from 'react';
+import {useHistory} from 'react-router-dom'
 
 const Modal = ({person, show, closeModal, tableData}) => {
   //Determining user to match and current user 
   // const currentUser = {id: person.id, isBuddy: person.im_a_buddy};
   
+  let history = useHistory();
   //Function to disable a user from the modal
   const disableUser = (person) => {
     const url = "http://localhost:9000/disable-user";
@@ -12,6 +14,7 @@ const Modal = ({person, show, closeModal, tableData}) => {
       isBuddy: person.im_a_buddy,
       id: person.id
     }
+    
 
     fetch(url, {
       method: 'PUT',
@@ -25,7 +28,9 @@ const Modal = ({person, show, closeModal, tableData}) => {
     .then( response => console.log("Success:", response) )
     
     closeModal();
-    window.location.reload();
+    history.push("/AdminTable");
+
+    //window.location.reload();
   }
 
   //Function to make the fetch of making a new match 
@@ -213,7 +218,7 @@ const Modal = ({person, show, closeModal, tableData}) => {
     //Show the modal if required
     return (
       <div className="modal-box" id="modal-box">
-         <div className="modalcontainer">
+         <div className="modalcontainer card">
             <h2 className="modal-head">{person.name}</h2>
             <div className="close-btn" onClick={closeModal}> x </div>
             <div className="modal-props">
@@ -221,27 +226,27 @@ const Modal = ({person, show, closeModal, tableData}) => {
               <div className="modalp underlined">
                 <div className="textrows">
                 <p> <b>Leeftijd: </b> </p>
-                <p>{age}</p>
+                <p className="border-b">{age}</p>
                </div>
               </div>
               <div className="modalp underlined">
                 <div className="textrows">
                   <p> <b>Email:</b></p>
-                  <p>{person.email}</p>
+                  <p className="border-b">{person.email}</p>
                 </div>
               </div>
 
               <div className="modalp underlined">
                 <div className="textrows">
                   <p> <b>Geboorteplaats:</b> </p> 
-                  <p>{person.hometown}</p>
+                  <p className="border-b">{person.hometown}</p>
                 </div>
               </div>
 
               <div className="modalp underlined">
                 <div className="textrows">
                   <p><b>Maatje of patiënt?</b> </p>
-                  <p className=""> {buddy_patient}</p> 
+                  <p className="border-b"> {buddy_patient}</p> 
                 </div>
               </div>
 
@@ -277,10 +282,12 @@ const Modal = ({person, show, closeModal, tableData}) => {
           </div>
           
 
-          <div className="btn-container">
+          {/*<div className="btn-container">
                 <button className="small-button delete" onClick={() => disableUser(person)}> Delete </button>
                 <button className="match-btn" onClick={matchUsers}> Save</button>
             </div>
+                <button className="match-btn" > Move to match list</button>
+            </div>*/}
 
          </div>
         <div className="overlay" onClick={closeModal}></div>
