@@ -197,7 +197,7 @@ const Modal = ({person, show, closeModal, tableData, getMultipleMatchesArray, ge
                 </div>
               </div>
 
-              <div className="modalp underlined">
+              {/* <div className="modalp underlined">
                 <div className="textrows">
                   <p><b> Studie: </b></p>
                   <p className="border-b"> 0</p>
@@ -209,7 +209,7 @@ const Modal = ({person, show, closeModal, tableData, getMultipleMatchesArray, ge
                   <p><b> Studiejaar: </b></p>
                   <p className="border-b"> 0</p>
                 </div>
-              </div>
+              </div> */}
 
               <div className="hobbiebox underlined">
                 <div className="textrows">
