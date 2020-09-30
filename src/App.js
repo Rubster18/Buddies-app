@@ -39,10 +39,9 @@ function App(){
             <Route path="/Login">
               <Login/>
             </Route>
-            <ProtectedRoute 
-              path="/AdminTable"
-              component={AdminTable}
-            />
+            <Route path="/AdminTable">
+              <AdminTable/>
+            </Route>
             <Route path="*">
               <BrokenLink/>
             </Route>

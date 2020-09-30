@@ -1,4 +1,4 @@
-import React , {useState, useEffect} from 'react';
+import React , {useState} from 'react';
 import Header from './Header';
 import {Redirect} from 'react-router-dom'
 
@@ -22,28 +22,40 @@ const Login = (props) => {
     const [loginCredentials, setLoginCredentials] = useState({
         email : "",
         password: "",
-        
+        loggedIn : false
     })
-    const [flag, setFlag] = useState(false);
 
     const handleFunction  =(e)=>{
         setLoginCredentials({...loginCredentials , [e.target.name] : e.target.value})
         
     }
     
-    const sudmitForm = (e) =>{
+    const submitForm = (e) =>{
         e.preventDefault();
-        console.log(loginCredentials);
+        
         const {email , password} = loginCredentials;
-        console.log(email, password);
+        
+        const sendmethod = {
+            method: 'POST', 
+            body: JSON.stringify(loginCredentials),
+            headers:{
+            'Content-Type': 'application/json'
+            }
+        }
+        fetch("http://localhost:9000/get-login-info",sendmethod)
+        .then((res) => res.json())
+        .then((message) => console.log(message))
+
+
         if (email === "a@ton.com" && password === "b") {
 
             console.log(email, password);
-            setFlag(true);
+            localStorage.setItem("token","aketeloneto");
+            setLoginCredentials({...loginCredentials , loggedIn : true});
         }
     }
-    if (flag ) {
-        console.log("hello, something is wrong man :(");
+    if (loginCredentials.loggedIn) {
+        
         return <Redirect to="/AdminTable" />
     }
     else{
@@ -56,7 +68,7 @@ const Login = (props) => {
                 <h2>Toegang voor beheerders</h2>
 
 
-                <form onSubmit ={sudmitForm} > 
+                <form onSubmit ={submitForm} > 
                     <label htmlFor="email">Email</label>
                     <input type="text" name="email" value={loginCredentials.email} onChange={handleFunction}/>
 
