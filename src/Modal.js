@@ -1,7 +1,8 @@
 import React from 'react';
 import {useHistory} from 'react-router-dom'
 
-const Modal = ({person, show, closeModal, tableData}) => {
+const Modal = ({person, show, closeModal, tableData, getMultipleMatchesArray, getMatchesByUser, calculate_age}) => {
+
   //Determining user to match and current user 
   // const currentUser = {id: person.id, isBuddy: person.im_a_buddy};
   
@@ -81,53 +82,6 @@ const Modal = ({person, show, closeModal, tableData}) => {
     
   }
 
-  const getMultipleMatchesArray = () => {
-
-    //Array with the number of occurrences for each person
-    const occurrenceNumArr = [];
-
-    tableData.map( element => {
-      //If the element does not exist in the array, result will be undefined
-      const result = occurrenceNumArr.find( el => el.id === element.id && el.isBuddy === element.im_a_buddy );
-      
-      if(result) {
-        //The element has been already counted before, so we increase the counter and add the name to the matchName array
-        
-        result.numberOfRepeats++;
-        result.matchName.push(element.matchname);
-
-      } else {
-        //The element has not been counted, so we add it to the array
-        occurrenceNumArr.push({
-          isBuddy: element.im_a_buddy,
-          id: element.id,
-          numberOfRepeats: 1,
-          matchName: [element.matchname]
-        })
-      }
-    })
-
-    //Creates an array with the id of the user and a string with all the matches
-    const matchesArray = occurrenceNumArr.map(element => {
-      return {
-        isBuddy: element.isBuddy,
-        id: element.id,
-        matches: element.matchName.join(', ')
-      };
-    });
-
-    return matchesArray;
-  }
-
-  const getMatchesByUser = (id, isBuddy, arr) => {
-    if(id && isBuddy && arr){
-      const matches = arr.find(element => element.id === id && element.isBuddy == isBuddy).matches; 
-      console.log(`The matches for the id ${id} and isBuddy ${isBuddy} are: ${matches}`);
-      
-      return matches;
-    }
-  }
-
   //Function to match two users
   const matchUsers = () => {
     //Buddy ==1, Patient ==0
@@ -183,15 +137,6 @@ const Modal = ({person, show, closeModal, tableData}) => {
 
   }
 
-  //Function to calculate the age based on the dateofbirth
-  const calculate_age = (dateofbirth) => { 
-    const date = new Date(dateofbirth);
-    const diff_ms = Date.now() - date.getTime();
-    const age_dt = new Date(diff_ms); 
-  
-    return Math.abs(age_dt.getUTCFullYear() - 1970);
-  }
-
   // const userPosition = tableData.indexOf(person);
   // const tableWithoutUser = tableData.splice(userPosition, 1);
   // console.log("La tabla sin el user ahora es: >>>", tableWithoutUser);
@@ -205,11 +150,13 @@ const Modal = ({person, show, closeModal, tableData}) => {
   //I for the map of the array 
   let i = 1;
 
-  
+  const 
+  matchesArray = getMultipleMatchesArray(tableData);
+  console.log("the array of matches is", matchesArray);
+
   console.log("Table data es: ", tableData);
 
-  const matchesArray = getMultipleMatchesArray();
-  console.log("the array of matches is", matchesArray);
+  const matches = getMatchesByUser(person.id, person.im_a_buddy, matchesArray);
 
   if (!show) {
      //Don't show the modal if the flag is false
@@ -257,13 +204,15 @@ const Modal = ({person, show, closeModal, tableData}) => {
                 </div>
               </div>
 
+              {console.log("GetMatchesByUser of ", person.id, "isABuddy", person.im_a_buddy, "with the array being", matchesArray, "is ", getMatchesByUser(person.id, person.im_a_buddy, matchesArray))}
+
               <div className="hobbiebox underlined">
                 <div className="textrows">
                   <p> <b>Match</b></p> 
                   <select name="selectMatch" defaultValue={'DEFAULT'}>
                     {/* If the user has a match, the default value for the select would be the name of the match, otherwise it will be "Select" */}
                     
-                    {getMatchesByUser(person.id, person.im_a_buddy, matchesArray) ? <option value='DEFAULT' disabled>{getMatchesByUser(person.id, person.isBuddy, matchesArray)}</option> : <option disabled value='DEFAULT'>Select</option>}
+                    {getMatchesByUser(person.id, person.im_a_buddy, matchesArray) ? <option value='DEFAULT' disabled>{getMatchesByUser(person.id, person.im_a_buddy, matchesArray)} (current) </option> : <option disabled value='DEFAULT'>Select an option</option>}
                     
                     {  
                       tableData.map( element => {
@@ -282,12 +231,11 @@ const Modal = ({person, show, closeModal, tableData}) => {
           </div>
           
 
-          {/*<div className="btn-container">
-                <button className="small-button delete" onClick={() => disableUser(person)}> Delete </button>
-                <button className="match-btn" onClick={matchUsers}> Save</button>
-            </div>
-                <button className="match-btn" > Move to match list</button>
-            </div>*/}
+          <div className="btn-container">
+            <button className="small-button delete" onClick={() => disableUser(person)}> Delete </button>
+            <button className="match-btn" onClick={matchUsers}> Save</button>
+          </div>
+                
 
          </div>
         <div className="overlay" onClick={closeModal}></div>

@@ -24,6 +24,11 @@ td, thead {
     text-overflow: ellipsis;
 }
 
+.match-column {
+    width: 200px;
+    max-width: 200px;
+}
+
 .name-column, .hometown-column {
     width: 130px;
     max-width: 130px;
