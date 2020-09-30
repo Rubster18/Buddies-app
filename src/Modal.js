@@ -9,7 +9,8 @@ const Modal = ({person, show, closeModal, tableData, getMultipleMatchesArray, ge
   let history = useHistory();
   //Function to disable a user from the modal
   const disableUser = (person) => {
-    const url = "https://beel-buddy-backend.herokuapp.com/disable-user";
+    const url = "http://localhost:9000/disable-user";
+
     const data = {
       isBuddy: person.im_a_buddy,
       id: person.id
@@ -43,7 +44,7 @@ const Modal = ({person, show, closeModal, tableData, getMultipleMatchesArray, ge
       id_u2: user2.id
     }
 
-    const url = "https://beel-buddy-backend.herokuapp.com/create-match";
+    const url = "http://localhost:9000/create-match";
 
     fetch(url, {
       method: 'POST',
@@ -59,7 +60,7 @@ const Modal = ({person, show, closeModal, tableData, getMultipleMatchesArray, ge
 
   //Function to make the fetch of disabling an existent match and creating a new one
   const fetchUpdateMatch = (currentUser, matchUser) => {
-    const url = "https://beel-buddy-backend.herokuapp.com/update-match";
+    const url = "http://localhost:9000/update-match";
 
     const data = {
       current_isBuddy: currentUser.isBuddy,
@@ -184,7 +185,7 @@ const Modal = ({person, show, closeModal, tableData, getMultipleMatchesArray, ge
 
               <div className="modalp underlined">
                 <div className="textrows">
-                  <p> <b>Woonplaats:</b> </p> 
+                  <p> <b>Geboorteplaats:</b> </p> 
                   <p className="border-b">{person.hometown}</p>
                 </div>
               </div>
@@ -217,6 +218,7 @@ const Modal = ({person, show, closeModal, tableData, getMultipleMatchesArray, ge
                 </div>
               </div>
 
+              {console.log("GetMatchesByUser of ", person.id, "isABuddy", person.im_a_buddy, "with the array being", matchesArray, "is ", getMatchesByUser(person.id, person.im_a_buddy, matchesArray))}
 
               <div className="hobbiebox underlined">
                 <div className="textrows">

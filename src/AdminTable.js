@@ -3,7 +3,7 @@ import Modal from './Modal';
 import HeaderAdmin from './HeaderAdmin';
 import { Redirect } from 'react-router-dom';
 
-const baseUrl = "https://beel-buddy-backend.herokuapp.com/";
+const baseUrl = "http://localhost:9000/";
 
 const AdminTableFetcher = props => {
     const [tableData, setTableData] = React.useState(null);
@@ -97,7 +97,7 @@ const AdminTableFetcher = props => {
                 <HeaderAdmin />
 
                 <div className="container-form">
-                    <h1>Tafel met deelnemers</h1>
+                    <h1>Table of participants</h1>
 
                     <form className="table-button-container">
                         <label className="table-button" onClick={seeBuddies}>
@@ -237,9 +237,9 @@ const AdminTable = props => {
                             <th className="name-column">Naam</th>
                             <th className="age-column">Leeftijd</th>
                             <th className="email-column">Email</th>
-                            <th className="hometown-column">Hometown</th>
-                            <th className="hobbies-column">Hobbies/Interest</th>
-                            <th className="buddy-column">Buddy or patient?</th>
+                            <th className="hometown-column">Woonplaats</th>
+                            <th className="hobbies-column">Hobby's / interesse</th>
+                            <th className="buddy-column">Buddy of patiënt?</th>
                             <th className="match-column">Match</th>
                         </tr>
                     </thead>

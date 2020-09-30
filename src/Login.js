@@ -42,7 +42,7 @@ const Login = (props) => {
             'Content-Type': 'application/json'
             }
         }
-        fetch("http://localhost:9000/get-login-info",sendmethod)
+        fetch("https://beel-buddy-backend.herokuapp.com:9000/get-login-info",sendmethod)
         .then((res) => res.json())
         .then((message) => console.log(message))
 
