@@ -21,8 +21,8 @@ function App(){
   return(
     <div className="App">
         
-       <div className="main-container">
-       <Router>
+      <div className="main-container">
+      <Router>
         <Switch>
             <Route exact path="/">
               <Homepage />
@@ -39,16 +39,15 @@ function App(){
             <Route path="/Login">
               <Login/>
             </Route>
-            <ProtectedRoute 
-              path="/AdminTable"
-              component={AdminTable}
-            />
+            <Route path="/AdminTable">
+              <AdminTable/>
+            </Route>
             <Route path="*">
               <BrokenLink/>
             </Route>
           </Switch>
       </Router>
-       </div>
+      </div>
         <Footer/>
     </div>
   );

@@ -24,16 +24,24 @@ td, thead {
     text-overflow: ellipsis;
 }
 
+.match-column {
+    width: 200px;
+    max-width: 200px;
+}
+
 .name-column, .hometown-column {
     width: 130px;
+    max-width: 130px;
 }
 
 .age-column {
     width: 65px;
+    max-width: 65px;
 }
 
 .email-column, .hobbies-column, .buddy-column {
     width: 200px;
+    max-width: 200px;
 }
 
 .table-button-container {
