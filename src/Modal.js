@@ -5,7 +5,7 @@ const Modal = ({person, show, closeModal, tableData}) => {
   let history = useHistory();
   //Function to disable a user from the modal
   const disableUser = (person) => {
-    const url = "http://localhost:9000/disable-user";
+    const url = "https://beel-buddy-backend.herokuapp.com/disable-user";
     const data = {
       isBuddy: person.im_a_buddy,
       id: person.id
@@ -80,7 +80,7 @@ const Modal = ({person, show, closeModal, tableData}) => {
 
               <div className="modalp underlined">
                 <div className="textrows">
-                  <p> <b>Geboorteplaats:</b> </p> 
+                  <p> <b>Woonplaats:</b> </p> 
                   <p className="border-b">{person.hometown}</p>
                 </div>
               </div>
@@ -92,12 +92,28 @@ const Modal = ({person, show, closeModal, tableData}) => {
                 </div>
               </div>
 
+              <div className="modalp underlined">
+                <div className="textrows">
+                  <p><b> Studie: </b></p>
+                  <p> {person.study} </p>
+                </div>
+              </div>
+
+              <div className="modalp underlined">
+                <div className="textrows">
+                  <p><b> Studiejaar: </b></p>
+                  <p> {person.studyYear} </p>
+                </div>
+              </div>
+
               <div className="hobbiebox underlined">
                 <div className="textrows">
                   <p> <b> hobby's en interesses:</b></p> 
                   <p>{person.hobbiesandinterests}</p>
                 </div>
               </div>
+
+
 
               <div className="hobbiebox underlined">
                 {/*<div className="textrows">

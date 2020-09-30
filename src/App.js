@@ -1,5 +1,5 @@
 import React from 'react';
-import "./styles/directoring.scss";
+import "./directoring.css";
 import BuddiesForm from "./BuddiesForm";
 import StudentForm from "./StudentForm"
 import Homepage from './Homepage';
