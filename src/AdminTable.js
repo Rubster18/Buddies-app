@@ -1,12 +1,25 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Modal from './Modal';
 import HeaderAdmin from './HeaderAdmin';
+import { Redirect } from 'react-router-dom';
 
 const baseUrl = "http://localhost:9000/";
 
 const AdminTableFetcher = props => {
     const [tableData, setTableData] = React.useState(null);
     const [mainArray, setMainArray] = React.useState(null);
+
+    const token = localStorage.getItem("token");
+    console.log(token);
+
+    const  [loggedIn, setLoggedIn] = useState(true);
+    
+        useEffect(() => {
+            if (token === null) {
+                
+                setLoggedIn(false)
+                }
+        }, [token])
 
     const seeBuddies = () => {
         const filteredData = mainArray.filter( element => element.im_a_buddy === 1);
@@ -67,12 +80,20 @@ const AdminTableFetcher = props => {
     
     const filteredArr = removeDuplicatesFromArr(tableData);
         
-    return (
+    
+    if (loggedIn === false) {
+        
+        return <Redirect to="404"/>
+    }
 
-        !tableData ? 
-            (<p>Loading...</p>) 
-        : (
-            <div className="">
+    else{
+
+        return (
+            
+            !tableData ? 
+              (<p>Loading...</p>) 
+            : (
+                <div className="">
                 <HeaderAdmin />
 
                 <div className="container-form">
@@ -110,7 +131,8 @@ const AdminTableFetcher = props => {
                 </div>
             </div> 
         )
-    )
+        )
+    }
 }
 
 
@@ -176,7 +198,7 @@ const AdminTable = props => {
         const date = new Date(dateofbirth);
         var diff_ms = Date.now() - date.getTime();
         var age_dt = new Date(diff_ms); 
-      
+    
         return Math.abs(age_dt.getUTCFullYear() - 1970);
     }
 
