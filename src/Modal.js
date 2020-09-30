@@ -200,14 +200,14 @@ const Modal = ({person, show, closeModal, tableData, getMultipleMatchesArray, ge
               <div className="modalp underlined">
                 <div className="textrows">
                   <p><b> Studie: </b></p>
-                  <p> {person.study} </p>
+                  <p className="border-b"> 0</p>
                 </div>
               </div>
 
               <div className="modalp underlined">
                 <div className="textrows">
                   <p><b> Studiejaar: </b></p>
-                  <p> {person.studyYear} </p>
+                  <p className="border-b"> 0</p>
                 </div>
               </div>
 
